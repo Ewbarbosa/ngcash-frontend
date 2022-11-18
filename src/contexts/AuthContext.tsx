@@ -1,14 +1,14 @@
 import { createContext, ReactNode, useState } from 'react'
 
+type UserProps = {
+  id: number;
+  username: string;
+}
+
 type AuthContextData = {
   user: UserProps;
   isAuthenticated: boolean;
   signIn: (credentials: SignInProps) => Promise<void>;
-}
-
-type UserProps = {
-  id: number;
-  username: string;
 }
 
 type SignInProps = {
@@ -27,8 +27,8 @@ export function AuthProvider({ children }: AuthProviderProps) {
   const [user, setUser] = useState<UserProps>();
   const isAuthenticated = !!user;
 
-  async function signIn() {
-    alert('Clicou');
+  async function signIn({username, password}: SignInProps) {
+    alert(username);
   }
   return (
     <AuthContext.Provider value={{user, isAuthenticated, signIn}}>

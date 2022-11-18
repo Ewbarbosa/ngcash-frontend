@@ -3,21 +3,26 @@ import styles from '../../styles/home.module.scss'
 import { Input } from '../components/ui/Input'
 import { Button } from '../components/ui/Button'
 
-import { FormEvent, useContext } from 'react'
+import { FormEvent, useContext, useState } from 'react'
 import { AuthContext } from '../contexts/AuthContext'
 
 import Link from 'next/link'
 
 export default function Home() {
 
-  const { signIn } = useContext(AuthContext);    
+  const { signIn } = useContext(AuthContext);
+  
+  const [username, setUsername] = useState('');
+  const [password, setPassword] = useState('');
+
+  const [loading, setLoading] = useState(false);
 
   async function handleLogin(event: FormEvent){
     event.preventDefault();
 
     let data = {
-      username: "teste@teste.com",
-      password: "102030"
+      username,
+      password
     }
 
     signIn(data);
@@ -35,9 +40,15 @@ export default function Home() {
           <form onSubmit={handleLogin}>
             <Input
               placeholder='Digite seu username'
+              type='text'
+              value={username}
+              onChange={ (e) => setUsername(e.target.value)}
             />
             <Input
               placeholder='Digite sua senha'
+              type='password'
+              value={password}
+              onChange={ (e) => setPassword(e.target.value)}
             />
 
             <Button
