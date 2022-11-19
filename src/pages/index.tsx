@@ -5,20 +5,29 @@ import { Button } from '../components/ui/Button'
 
 import { FormEvent, useContext, useState } from 'react'
 import { AuthContext } from '../contexts/AuthContext'
+import { toast } from 'react-toastify'
+
+import { canSSRGuest } from '../utils/CanSSRGuest'
 
 import Link from 'next/link'
 
 export default function Home() {
 
   const { signIn } = useContext(AuthContext);
-  
+
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
 
   const [loading, setLoading] = useState(false);
 
-  async function handleLogin(event: FormEvent){
+  async function handleLogin(event: FormEvent) {
     event.preventDefault();
+
+    if (username === '' || password === '') {
+      toast.warning('Dados inválidos')
+      //alert('Dados inválidos')
+      return;
+    }
 
     let data = {
       username,
@@ -42,13 +51,13 @@ export default function Home() {
               placeholder='Digite seu username'
               type='text'
               value={username}
-              onChange={ (e) => setUsername(e.target.value)}
+              onChange={(e) => setUsername(e.target.value)}
             />
             <Input
               placeholder='Digite sua senha'
               type='password'
               value={password}
-              onChange={ (e) => setPassword(e.target.value)}
+              onChange={(e) => setPassword(e.target.value)}
             />
 
             <Button
@@ -60,10 +69,16 @@ export default function Home() {
           </form>
 
           <Link className={styles.text} href="/signup">
-            Ainda não é cliente? Abra sua conta agora mesmo.
+            Abra sua conta
           </Link>
         </div>
       </div>
     </>
   )
 }
+
+export const getServerSideProps = canSSRGuest(async (ctx) => {
+  return {
+    props: {}
+  }
+})
