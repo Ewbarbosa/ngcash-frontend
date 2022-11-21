@@ -6,7 +6,7 @@ export function setupApiClient(ctx = undefined) {
     let cookies = parseCookies(ctx);
 
     const api = axios.create({
-        baseURL: 'http://192.168.15.10:3333',
+        baseURL: 'http://localhost:3333',
         headers: {
             Authorization: `Bearer ${cookies['@ngcash.token']}`
         }

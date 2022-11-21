@@ -20,6 +20,10 @@ export function Header() {
             Transferência
           </Link>
 
+          <Link href="/extract">
+            Extrato
+          </Link>
+
           <button onClick={signOut}>
             <FiLogOut color='#fff' size={24} />
           </button>

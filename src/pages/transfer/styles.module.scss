@@ -1,0 +1,38 @@
+.container {
+    min-height: 80vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+
+    h1 {
+        color: var(--white);
+    }
+}
+
+.transfer {
+    margin-top: 1rem;
+    width: 600px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    padding: 2rem 1.5rem;
+
+    form {
+        width: 90%;
+        display: flex;
+        flex-direction: column;
+    }
+
+    form button {
+        height: 40px;
+        font-size: 1.2rem;
+    }
+}
+
+@media (max-width: 620px) {
+    .transfer {
+        width: 90%;
+    }
+}
